@@ -1,6 +1,7 @@
 #include "main.h"
 #include <stdio.h>
 #include <stdarg.h>
+#include <string.h>
 
 /**
  * _printf - a function that produces output according to a format.
@@ -15,40 +16,42 @@ int _printf(const char *format, ...)
 
 	int len = 0;
 
-	va_start(args, format);
+	int i;
 
-	while (*format)
+	int match_found = 0;
+
+	va_start(args, format);
+	while (*format != '\0')
 	{
 		if (*format == '%')
 		{
-			switch (*(++format))
-			{
-				case 'c':
-					len += printf_char(args);
-					break;
-				case 's':
-					len += printf_exclusive_string(args);
-					break;
-				case '%':
-					len += printf_37();
-					break;
-				default:
-					_putchar('%');
-					if(*format)
-					{
-						_putchar(*format++);
-						len += 2;
-					}
-					else
-						len += 1;
-					continue;
-			}
 			format++;
+			match_found = 0;
+			for (i = 0; i < NUM_CONVERT_MATCHES; i++)
+			{
+				if (strncmp(format,
+					m[i].specifier,2) == 0)
+				{
+					match_found = 1;
+					len += m[i].f(args);
+					format += 2;
+					break;
+				}
+			}
+			if (!match_found)
+			{
+				len += _putchar('%');
+				if (*format != '%')
+				{
+					len += _putchar(*format);
+					format++;
+				}
+			}
 		}
 		else
 		{
-			_putchar(*format++);
-			len++;
+			len += _putchar(*format);
+			format++;
 		}
 	}
 	va_end(args);

@@ -3,13 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
-#include <limits.h>
-#include <unistd.h>
+#include "convert.h"
+#define NUM_CONVERT_MATCHES 3
 
 int _printf(const char *format, ...);
-int printf_37(void);
-int printf_exclusive_string(va_list val);
-int printf_char(va_list val);
-int _putchar(char c);
-int printf_HEX_aux(unsigned int num);
+int _putchar (char c);
 #endif
