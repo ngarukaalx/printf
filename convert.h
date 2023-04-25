@@ -6,7 +6,7 @@ typedef struct convert_match
 {
 	char *specifier;
 	int (*f)(va_list);
-}convert_match;
+} convert_match;
 
 extern convert_match m[];
 #endif

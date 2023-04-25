@@ -30,7 +30,7 @@ int _printf(const char *format, ...)
 			for (i = 0; i < NUM_CONVERT_MATCHES; i++)
 			{
 				if (strncmp(format,
-					m[i].specifier,2) == 0)
+					m[i].specifier, 2) == 0)
 				{
 					match_found = 1;
 					len += m[i].f(args);
