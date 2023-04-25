@@ -1,3 +1,4 @@
+#include "convert.h"
 #include "main.h"
 #include <stdio.h>
 #include <stdarg.h>
@@ -13,46 +14,29 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-
-	int len = 0;
-
-	int i;
-
-	int match_found = 0;
+	int i = 0, j, len = 0;
 
 	va_start(args, format);
-	while (*format != '\0')
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+		return (-1);
+
+Here:
+	while (format[i] != '\0')
 	{
-		if (*format == '%')
+		j = 3;
+		while (j >= 0)
 		{
-			format++;
-			match_found = 0;
-			for (i = 0; i < NUM_CONVERT_MATCHES; i++)
+			if (m[j].specifier[0] == format[i] && m[j].specifier[1] == format[i + 1])
 			{
-				if (strncmp(format,
-					m[i].specifier, 2) == 0)
-				{
-					match_found = 1;
-					len += m[i].f(args);
-					format += 2;
-					break;
-				}
+				len += m[j].f(args);
+				i = i + 2;
+				goto Here;
 			}
-			if (!match_found)
-			{
-				len += _putchar('%');
-				if (*format != '%')
-				{
-					len += _putchar(*format);
-					format++;
-				}
-			}
+			j--;
 		}
-		else
-		{
-			len += _putchar(*format);
-			format++;
-		}
+		_putchar(format[i]);
+		len++;
+		i++;
 	}
 	va_end(args);
 	return (len);
