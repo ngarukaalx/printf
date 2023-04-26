@@ -13,30 +13,37 @@
 
 int _printf(const char *format, ...)
 {
+	convert_match m[] = {
+	{"%s", printf_string}, {"%c", printf_char},
+	{"%%", printf_20},
+	{"%i", printf_int},
+	{NULL, NULL}
+};
+
 	va_list args;
-	int i = 0, j, len = 0;
+	int k = 0, j, len = 0;
 
 	va_start(args, format);
 	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
 		return (-1);
 
 Here:
-	while (format[i] != '\0')
+	while (format[k] != '\0')
 	{
 		j = 3;
 		while (j >= 0)
 		{
-			if (m[j].specifier[0] == format[i] && m[j].specifier[1] == format[i + 1])
+			if (m[j].specifier[0] == format[k] && m[j].specifier[1] == format[k + 1])
 			{
 				len += m[j].f(args);
-				i = i + 2;
+				k = k + 2;
 				goto Here;
 			}
 			j--;
 		}
-		_putchar(format[i]);
+		_putchar(format[k]);
 		len++;
-		i++;
+		k++;
 	}
 	va_end(args);
 	return (len);

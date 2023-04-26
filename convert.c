@@ -97,9 +97,3 @@ int printf_int(va_list arg)
 
 	return (i);
 }
-convert_match m[] = {
-	{"%s", printf_string}, {"%c", printf_char},
-	{"%%", printf_20},
-	{"%i", printf_int},
-	{NULL, NULL}
-};
