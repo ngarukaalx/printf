@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include "convert.h"
-#define NUM_CONVERT_MATCHES 3
+#define NUM_CONVERT_MATCHES 4
 
 int _printf(const char *format, ...);
 int _putchar (char c);

@@ -18,6 +18,7 @@ int _printf(const char *format, ...)
 	{"%%", printf_20},
 	{"%i", printf_int},
 	{"%d", printf_int},
+	{"%b", binary_print},
 	{NULL, NULL}
 };
 
@@ -31,7 +32,7 @@ int _printf(const char *format, ...)
 Here:
 	while (format[k] != '\0')
 	{
-		j = 3;
+		j = 4;
 		while (j >= 0)
 		{
 			if (m[j].specifier[0] == format[k] && m[j].specifier[1] == format[k + 1])

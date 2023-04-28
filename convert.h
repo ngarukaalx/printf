@@ -16,5 +16,5 @@ int printf_string(va_list args);
 int printf_char(va_list args);
 int printf_20(va_list args);
 int printf_int(va_list args);
-
+int binary_print(va_list args);
 #endif
