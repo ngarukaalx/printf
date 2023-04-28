@@ -32,7 +32,7 @@ int _printf(const char *format, ...)
 Here:
 	while (format[k] != '\0')
 	{
-		j = 4;
+		j = 5;
 		while (j >= 0)
 		{
 			if (m[j].specifier[0] == format[k] && m[j].specifier[1] == format[k + 1])
